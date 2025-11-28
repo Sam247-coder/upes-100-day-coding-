@@ -1,0 +1,37 @@
+/* Print initials of a name with the surname displayed in full.*/
+#include <stdio.h>
+#include <ctype.h>
+#include <string.h>
+
+int main() {
+    char name[100];
+    int i = 0, len;
+
+    printf("Enter full name: ");
+    gets(name);
+
+    len = strlen(name);
+
+    if (name[0] != ' ')
+        printf("%c. ", toupper(name[0]));
+
+    int surnameIndex = -1;
+
+    for (i = 1; i < len; i++) {
+        if (name[i] == ' ' && name[i + 1] != ' ') {
+            surnameIndex = i + 1;
+
+            int j = i + 1;
+            while (j < len && name[j] != ' ')
+                j++;
+
+            if (j < len)
+                printf("%c. ", toupper(name[i + 1]));
+        }
+    }
+
+    if (surnameIndex != -1)
+        printf("%s", &name[surnameIndex]);
+
+    return 0;
+}
