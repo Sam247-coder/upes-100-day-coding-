@@ -1,0 +1,45 @@
+/*Store employee data in a binary file using fwrite() and read using fread().*/
+#include <stdio.h>
+
+struct Date {
+    int day;
+    int month;
+    int year;
+};
+
+struct Employee {
+    char name[50];
+    int emp_id;
+    float salary;
+    struct Date joining_date;
+};
+
+int main() {
+    FILE *fp;
+    struct Employee emp;
+
+    fp = fopen("employee.dat", "wb");
+    if (!fp) return 1;
+
+    scanf(" %[^\n]", emp.name);
+    scanf("%d", &emp.emp_id);
+    scanf("%f", &emp.salary);
+    scanf("%d %d %d", &emp.joining_date.day, &emp.joining_date.month, &emp.joining_date.year);
+
+    fwrite(&emp, sizeof(struct Employee), 1, fp);
+    fclose(fp);
+
+    fp = fopen("employee.dat", "rb");
+    if (!fp) return 1;
+
+    struct Employee read_emp;
+    fread(&read_emp, sizeof(struct Employee), 1, fp);
+    fclose(fp);
+
+    printf("%s\n", read_emp.name);
+    printf("%d\n", read_emp.emp_id);
+    printf("%.2f\n", read_emp.salary);
+    printf("%02d-%02d-%04d\n", read_emp.joining_date.day, read_emp.joining_date.month, read_emp.joining_date.year);
+
+    return 0;
+}
