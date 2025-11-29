@@ -1,0 +1,15 @@
+/*Show that enums store integers by printing assigned values.*/
+#include <stdio.h>
+
+enum UserRole {
+    ADMIN = 10,
+    USER = 20,
+    GUEST = 30
+};
+
+int main() {
+    printf("ADMIN = %d\n", ADMIN);
+    printf("USER = %d\n", USER);
+    printf("GUEST = %d\n", GUEST);
+    return 0;
+}
